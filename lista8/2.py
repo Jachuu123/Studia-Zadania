@@ -18,4 +18,4 @@ def is_ukladne(main,predicate):
 
 
 
-print(is_ukladne('piesek', 'pis'))
+print(is_ukladne('kajak', 'akaj'))

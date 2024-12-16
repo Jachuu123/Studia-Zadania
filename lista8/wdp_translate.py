@@ -20,6 +20,8 @@ for x in open('pol_ang.txt','r', encoding='utf-8'):
         continue    
     pol, ang = L
     pol_ang[pol].append(ang)
+
+    #print(pol_ang)
     
 def tlumacz(polskie):
     wynik = []
@@ -29,9 +31,9 @@ def tlumacz(polskie):
             max_len = 0          
             for translation in pol_ang[s]:
                 if translation in brown:
-                    brown[translation] > max_len
-                    max_len = brown[translation]
-                    selected = translation
+                    if brown[translation] > max_len:
+                        max_len = brown[translation]
+                        selected = translation
             wynik.append(selected)
         else:
             wynik.append('[?]')
@@ -39,5 +41,5 @@ def tlumacz(polskie):
     
 zdanie = 'chłopiec z dziewczyna pójść do kino'.split()
 
-print(tlumacz(zdanie))          
+print(tlumacz(zdanie))
         

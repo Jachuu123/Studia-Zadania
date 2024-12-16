@@ -26,20 +26,14 @@ def murek(s,bok):
      elif 0 <= int(a) and int(a) < len(COLORS):
         color('black', COLORS[int(a)])
 
-        
 color('black', 'yellow')
 
-ht()
+ht() #ukryj żółwia
 
-tracer(0,0) # szybkie rysowanie     
-# murek('ff0ffrfrf2ff4lflf3ffrfrf4ff',10)
-
+tracer(0,0) # szybkie rysowanie
 for i in range(40):
     msg = 'r' + str(i % 6) + 'f'*(40-i)
     murek(msg, 10)
-#murek('ff0ffrfrf2ff4lflf3ffrfrf4ff',10)
-
-
-update() # uaktualnienie rysunku
+update()
 
 input()

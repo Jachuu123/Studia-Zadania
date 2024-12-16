@@ -4,7 +4,7 @@ words = set([line.strip() for line in open('words.txt', 'r', encoding='utf-8').r
 
 def find_pairs(name):
     name = name.replace(" ", "").lower()
-    name_hash = Counter(name)
+    name_hash = Counter(name) #słownik zliczający litery w imieniu
     
     words_hash = [s for s in words if not (Counter(s) - name_hash)]
     
@@ -16,7 +16,7 @@ def find_pairs(name):
     
     return result
 
-pairs = find_pairs("Jakub Sternik")
+pairs = find_pairs("Jan Behrendt")
     
 for pair in sorted(pairs):
     print(pair)

@@ -1,42 +1,47 @@
-from turtle import Turtle, tracer
-from random import choice
+import turtle
+import random
 
-rows = [row.strip() for row in open("pixels.txt").readlines()]
+def konwertuj_kolor(rgb):
+    return tuple(c / 255 for c in rgb)
 
-t = Turtle()
-t.speed(0)
-t.penup()
-# tracer(0,1)
-def draw_pixel(x, y, color):
-    t.goto(x, y)
-    t.begin_fill()
-    t.fillcolor(tuple(color))
-    for i in range(4):
-        t.forward(5)
-        t.right(90)
-    t.end_fill()
+def rysuj_piksel(x, y, kolor, bok):
+    kolor = konwertuj_kolor(kolor)
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+    turtle.begin_fill()
+    turtle.fillcolor(kolor)
+    for _ in range(4):
+        turtle.forward(bok)
+        turtle.right(90)
+    turtle.end_fill()
 
-x = 0
-y = 0
+def wczytaj_obraz(nazwa_pliku):
+    obraz = []
+    with open(nazwa_pliku, "r") as plik:
+        for linia in plik:
+            piksele = linia.strip().split(" ")
+            obraz.append([eval(piksel) for piksel in piksele])
+    return obraz
 
-pixels_with_coord = []
+def rysuj_obraz_losowo(obraz, bok_piksela=10):
+    turtle.speed("fastest")
+    x_start = -len(obraz[0]) * bok_piksela / 2
+    y_start = len(obraz) * bok_piksela / 2
 
-for row in rows:
-    for pixel in row.split():
-        temp = pixel.strip('(').strip(')')
-        a = temp.split(",")
-        field = tuple([int(x)/255 for x in a])
-        predicate = [x,y,field]
-        pixels_with_coord.append(predicate)
-        x+=1
+    piksele = []
+    for i, wiersz in enumerate(obraz):
+        for j, piksel in enumerate(wiersz):
+            x = x_start + j * bok_piksela
+            y = y_start - i * bok_piksela
+            piksele.append((x, y, piksel))
 
-    x = 0
-    y+=1
+    random.shuffle(piksele)
 
-temp = []
-while len(pixels_with_coord):
-        pxl = choice(pixels_with_coord)
-        draw_pixel(pxl[0]*5, pxl[1]*5, pxl[2])
-        pixels_with_coord.remove(pxl)
+    for x, y, kolor in piksele:
+        rysuj_piksel(x, y, kolor, bok_piksela)
 
-input()
+obraz = wczytaj_obraz("pixels.txt")
+rysuj_obraz_losowo(obraz)
+
+turtle.done()
