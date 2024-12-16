@@ -9,8 +9,8 @@ def drzewo_pitagorasa(t, dlugosc, poziom, nachylenie_galezi):
     pozycja = t.position()
     kat = t.heading()
 
-    # Lewa gałąź
-    t.left(30)
+    # Lewa
+    t.left(nachylenie_galezi)
     drzewo_pitagorasa(t, dlugosc * math.sqrt(2) / 2, poziom - 1, nachylenie_galezi)
 
     t.penup()
@@ -18,7 +18,8 @@ def drzewo_pitagorasa(t, dlugosc, poziom, nachylenie_galezi):
     t.setheading(kat)
     t.pendown()
 
-    t.right(30)
+    # Prawa
+    t.right(nachylenie_galezi)
     drzewo_pitagorasa(t, dlugosc * math.sqrt(2) / 2, poziom - 1, nachylenie_galezi)
 
     t.penup()
@@ -37,7 +38,7 @@ t.left(90)
 t.color("green")
 
 dlugosc_pnia = 100
-poziom_rekurencji = 10
+poziom_rekurencji = 15
 nachylenie_galezi = 30
 
 t.penup()
