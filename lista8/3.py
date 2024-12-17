@@ -16,7 +16,7 @@ def find_pairs(name):
     
     return result
 
-pairs = find_pairs("Jan Behrendt")
+pairs = find_pairs("Adam Mickieicz")
     
 for pair in sorted(pairs):
     print(pair)

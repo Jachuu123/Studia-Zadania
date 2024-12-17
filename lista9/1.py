@@ -38,7 +38,7 @@ t.left(90)
 t.color("green")
 
 dlugosc_pnia = 100
-poziom_rekurencji = 15
+poziom_rekurencji = 7
 nachylenie_galezi = 30
 
 t.penup()
